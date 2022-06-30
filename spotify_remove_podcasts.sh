@@ -29,6 +29,6 @@ fi
 
 # Actually do the thing!
 cd "$target/current/active/files/extra/share/spotify/Apps"
-unzip -p xpui.spa xpui.js | sed 's/,show,/,/' | sed 's/,episode"/"/' > xpui.js
+unzip -p xpui.spa xpui.js | sed 's/withQueryParameters(e){return this.queryParameters=e,this}/withQueryParameters(e){return this.queryParameters=(e.types?{...e, types: e.types.split(",").filter(_ => !["episode","show"].includes(_)).join(",")}:e),this}/' > xpui.js
 cp xpui.spa xpui.spa.bak
 zip xpui.spa xpui.js
